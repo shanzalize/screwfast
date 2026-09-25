@@ -1,20 +1,149 @@
 ---
+// Import the necessary components
 import MainLayout from '@/layouts/MainLayout.astro';
-import constructionImage from '@images/construction-image.avif';
-import aerialImage from '@images/aerial-view.avif';
-import blueprintImage from '@images/blueprints-image.avif';
-import workersImage from '@images/construction-workers.avif';
+import HeroSection from '@components/sections/landing/HeroSection.astro';
+import HeroSectionAlt from '@components/sections/landing/HeroSectionAlt.astro';
+import ClientsSection from '@components/sections/landing/ClientsSection.astro';
+import FeaturesGeneral from '@components/sections/features/FeaturesGeneral.astro';
+import FeaturesNavs from '@components/sections/features/FeaturesNavs.astro';
+import TestimonialsSection from '@components/sections/testimonials/TestimonialsSection.astro';
+import PricingSection from '@components/sections/pricing/PricingSection.astro';
+import FAQ from '@components/sections/misc/FAQ.astro';
+import AnnouncementBanner from '@components/ui/banners/AnnouncementBanner.astro';
+import heroImage from '@images/hero-image.avif';
+import faqs from '@data/faqs.json';
+import features from '@data/features.json';
+import pricing from '@data/pricing.json';
+import featureImage from '@images/features-image.avif';
+import construction from '@images/construction-image.avif';
+import tools from '@images/automated-tools.avif';
+import dashboard from '@images/dashboard-image.avif';
+import { partnersData } from '@/data_files/constants';
+
+const avatarSrcs: Array<string> = [
+  'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80',
+  'https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80',
+  'https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&&auto=format&fit=facearea&facepad=3&w=300&h=300&q=80',
+  'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80',
+];
 ---
-<MainLayout title="PARK'ES YAPI | Eskişehir" lang="tr" customDescription="PARK'ES YAPI — Eskişehir'de çağdaş mimari ve güçlü yapılar.">
-<div class="reference-page"><header class="site-nav"><a class="brand" href="#anasayfa">PARK'ES <span>YAPI</span></a><nav><a href="#projeler">Projeler</a><a href="#hakkimizda">Hakkımızda</a><a href="#hizmetler">Hizmetler</a><a href="#iletisim">İletişim</a></nav><a class="nav-cta" href="#iletisim">Teklif alın ↗</a><button class="menu-button" aria-label="Menüyü aç">☰</button></header>
-<main><section class="hero" id="anasayfa"><div class="hero-image"><img src={aerialImage.src} alt="Modern konut projesi"/><div class="hero-overlay"><p>Eskişehir / Türkiye</p><div class="hero-title"><h1>Building<br/><em>Beyond</em></h1><a href="#iletisim">Bize ulaşın ↗</a></div><p class="hero-description">Mimariyi yalnızca binalar değil, yaşam biçimleri tasarlamak olarak görüyoruz.</p></div></div><div class="hero-side"><p>01 — PARK'ES YAPI</p><h2>Geleceği<br/><em>inşa ediyoruz.</em></h2><p>Çağdaş tasarım, sağlam mühendislik ve Eskişehir'e değer katan projeler.</p></div></section>
-<section class="about" id="hakkimizda"><p class="kicker">— Hakkımızda</p><div><h2>Yapı tasarlamanın<br/><em>sanatı ve bilimi.</em></h2><p>İyi bir yapı; çevresiyle uyumlu, içinde yaşayanlara ilham veren ve yıllar geçtikçe değer kazanan yapıdır. PARK'ES YAPI olarak tasarım, işçilik ve güveni bir araya getiriyoruz.</p></div></section>
-<section class="projects" id="projeler"><div class="section-head"><div><p class="kicker">— Seçili projeler</p><h2>Son<br/><em>projeler.</em></h2></div><a href="#iletisim">Tümünü görüntüle ↗</a></div><div class="project-grid"><a class="project featured" href="#iletisim"><img src={constructionImage.src} alt="Park Evleri"/><div><small>01 / Tepebaşı, Eskişehir</small><h3>Park Evleri</h3></div></a><a class="project" href="#iletisim"><img src={blueprintImage.src} alt="Çizgilerin Ötesi"/><div><small>02 / Odunpazarı</small><h3>Çizgilerin Ötesi</h3></div></a><a class="project" href="#iletisim"><img src={workersImage.src} alt="Atölye 26"/><div><small>03 / Eskişehir OSB</small><h3>Atölye 26</h3></div></a></div></section>
-<section class="categories" id="hizmetler"><div class="category-image"><img src={aerialImage.src} alt="Modern mimari"/><h2>Proje<br/><em>kategorileri</em></h2></div><div class="category-list"><p class="kicker">— Neler yapıyoruz</p><a href="#iletisim"><span>01</span><strong>Konut projeleri</strong><small>Yaşayan, nefes alan mekanlar</small><b>↗</b></a><a href="#iletisim"><span>02</span><strong>Ticari yapılar</strong><small>İşinize değer katan çözümler</small><b>↗</b></a><a href="#iletisim"><span>03</span><strong>Anahtar teslim</strong><small>Fikirden gerçeğe, tek elden</small><b>↗</b></a></div></section>
-<section class="contact" id="iletisim"><p class="kicker">— Yeni bir proje</p><h2>Birlikte<br/><em>başlayalım.</em></h2><a class="contact-button" href="tel:+902222222222">Projenizi konuşalım ↗</a></section></main></div></MainLayout>
-<style>
-.reference-page{--brown:#603522;--cream:#f5f4f0;--ink:#111;--line:#d6d3ce;background:var(--cream);color:var(--ink);margin:0 -2rem;font-family:Arial,Helvetica,sans-serif}.reference-page *{box-sizing:border-box}.reference-page h1,.reference-page h2,.reference-page h3,.reference-page p{margin:0}.reference-page h1,.reference-page h2{font-weight:400;letter-spacing:-.07em;line-height:.9}.reference-page em{font-family:Georgia,serif;font-weight:400}.site-nav{height:74px;display:flex;align-items:center;gap:2rem;padding:0 5vw;border-bottom:1px solid var(--line);background:var(--cream)}.brand{font-size:1rem;font-weight:700;text-decoration:none;color:var(--ink)}.brand span{font-weight:400}.site-nav nav{display:flex;gap:2rem;margin:auto}.site-nav a{color:var(--ink);text-decoration:none;font-size:.68rem}.nav-cta{background:var(--ink)!important;color:#fff!important;padding:.8rem 1.1rem;border-radius:2rem}.menu-button{display:none;border:0;background:none;font-size:1.3rem}.hero{display:grid;grid-template-columns:1.55fr .75fr;min-height:650px;padding:2.7vw 5vw 4vw;gap:2.7vw}.hero-image{position:relative;min-height:570px;overflow:hidden;border-radius:18px;background:#333}.hero-image img,.category-image img{width:100%;height:100%;object-fit:cover;filter:brightness(.72) saturate(.7)}.hero-overlay{position:absolute;inset:0;color:#fff;padding:1.8rem 2rem;display:flex;flex-direction:column;justify-content:space-between}.hero-overlay p{font-size:.66rem;letter-spacing:.08em}.hero-title{display:flex;align-items:end;justify-content:space-between;gap:2rem}.hero-title h1{font-size:clamp(4rem,8vw,8rem);line-height:.78}.hero-title a,.contact-button{color:var(--ink);background:#fff;border-radius:2rem;padding:.8rem 1.1rem;text-decoration:none;font-size:.65rem;white-space:nowrap}.hero-description{max-width:16rem;line-height:1.5}.hero-side{padding:1rem 0;display:flex;flex-direction:column;justify-content:space-between;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.hero-side p{font-size:.78rem;line-height:1.5;color:#575550}.hero-side h2{font-size:clamp(2.8rem,5vw,5rem)}.about,.projects,.categories{padding:7vw 8vw}.about{display:grid;grid-template-columns:1fr 1.7fr;gap:5vw;border-top:1px solid var(--line)}.kicker{font-size:.65rem;letter-spacing:.08em}.about h2,.section-head h2{font-size:clamp(3rem,6vw,6rem);margin-bottom:2rem}.about>div>p{line-height:1.5;max-width:28rem}.projects{background:#e9e7e2}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:3rem}.section-head a{color:var(--ink);font-size:.68rem;text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:.7rem}.project-grid{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:1.4rem}.project{color:var(--ink);text-decoration:none}.project img{width:100%;height:270px;object-fit:cover;filter:saturate(.7);border-radius:10px}.project.featured img{height:450px}.project div{padding-top:1rem}.project small{font-size:.58rem;letter-spacing:.08em}.project h3{font-size:1.2rem;font-weight:400;margin-top:.5rem}.categories{display:grid;grid-template-columns:1fr 1fr;gap:5vw}.category-image{height:470px;position:relative;overflow:hidden;border-radius:12px;color:#fff}.category-image h2{position:absolute;left:2rem;bottom:2rem;font-size:clamp(3rem,5vw,5rem)}.category-list{display:flex;flex-direction:column;justify-content:center}.category-list>a{display:grid;grid-template-columns:2rem 1fr auto;column-gap:1rem;align-items:center;padding:1.6rem 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink)}.category-list>a:first-of-type{border-top:1px solid var(--line)}.category-list span,.category-list small{font-size:.65rem;color:#78756d}.category-list strong{font-size:1.2rem;font-weight:400}.category-list small{grid-column:2;margin-top:.35rem}.category-list b{font-weight:400}.contact{background:var(--brown);color:#fff;padding:8vw;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:end}.contact h2{font-size:clamp(4rem,8vw,8rem);margin-top:2rem}.contact-button{justify-self:end}.contact .kicker{color:#e8cfc3}
-@media(max-width:700px){.reference-page{margin:0 -1rem}.site-nav{height:64px;padding:0 1.3rem}.site-nav nav,.nav-cta{display:none}.menu-button{display:block;margin-left:auto}.hero{display:flex;flex-direction:column;padding:1.2rem 1.3rem 3rem;gap:1.5rem;min-height:0}.hero-image{min-height:490px}.hero-overlay{padding:1.2rem}.hero-title{display:block}.hero-title h1{font-size:4.2rem;margin-bottom:1.5rem}.hero-side{padding:1.3rem 0;gap:3rem}.hero-side h2{font-size:3.3rem}.about,.categories{display:block;padding:4rem 1.3rem}.about h2{font-size:3.5rem;margin:2rem 0}.projects{padding:4rem 1.3rem}.section-head{display:block}.section-head a{display:inline-block;margin-top:1.5rem}.section-head h2{font-size:3.8rem}.project-grid{display:block}.project{display:block;margin-bottom:2rem}.project img,.project.featured img{height:300px}.category-image{height:360px;margin-bottom:3rem}.contact{display:block;padding:5rem 1.3rem}.contact h2{font-size:4.5rem;margin:2rem 0}.contact-button{display:inline-block}}
-</style>
-<style is="global">body{background:#603522!important}</style>
-<script>document.querySelectorAll('a[href^="#"]').forEach((link)=>link.addEventListener('click',(event)=>{const target=document.querySelector(link.getAttribute('href')||'');if(target){event.preventDefault();target.scrollIntoView({behavior:'smooth'})}}));</script>
+
+<MainLayout>
+  <AnnouncementBanner
+    btnId="dismiss-button"
+    btnTitle="Explore ScrewFast on GitHub"
+    url="https://github.com/mearashadowfax/ScrewFast"
+  />
+
+  <HeroSection
+    title=`Equip Your Projects with <span
+        class="text-yellow-500 dark:text-yellow-400">ScrewFast</span>`
+    subTitle="Top-quality hardware tools and expert construction services for every project need."
+    primaryBtn="Start Exploring"
+    primaryBtnURL="/products"
+    secondaryBtn="Contact Sales Team"
+    secondaryBtnURL="/contact"
+    withReview={true}
+    avatars={avatarSrcs}
+    rating=`<span class="font-bold">4.8</span> / 5`
+    starCount={4}
+    reviews=`From Over <span class="font-bold">12.8k</span> Reviews`
+    src={heroImage}
+    alt="Stack of ScrewFast product boxes containing assorted hardware tools"
+  />
+
+  <ClientsSection
+    title="Trusted by Industry Leaders"
+    subTitle="Experience the reliability chosen by industry giants."
+    partners={partnersData}
+  />
+
+  <FeaturesGeneral
+    title="Meeting Industry Demands"
+    subTitle="At ScrewFast, we tackle the unique challenges encountered in the hardware and construction sectors. From cutting-edge tools to expert services, we're dedicated to helping you overcome obstacles and achieve your goals."
+    src={featureImage}
+    alt="ScrewFast products in floating boxes"
+    features={features}
+  />
+
+  <FeaturesNavs
+    title=`Customize <span class="text-yellow-500 dark:text-yellow-400">ScrewFast</span>'s offerings to perfectly suit your hardware and construction needs.`
+    tabs={[
+      {
+        heading: 'Cutting-Edge Tools',
+        content:
+          "Empower your projects with ScrewFast's cutting-edge tools. Experience enhanced efficiency in construction management with our sophisticated automated solutions.",
+        svg: 'tools',
+        src: tools,
+        alt: 'Yellow and black heavy equipment on brown grass field',
+        first: true,
+      },
+      {
+        heading: 'Intuitive Dashboards',
+        content:
+          "Navigate with ease using ScrewFast's intuitive dashboards. Set up and oversee your projects seamlessly, with user-friendly interfaces designed for quick and effective workflow management.",
+        svg: 'dashboard',
+        src: dashboard,
+        alt: 'A screenshot or graphic representation of the intuitive dashboard',
+        second: true,
+      },
+      {
+        heading: 'Robust Features',
+        content:
+          "Minimize complexity, maximize productivity. ScrewFast's robust features are engineered to streamline your construction process, delivering results that stand out for their excellence.",
+        svg: 'house',
+        src: construction,
+        alt: 'Gray metal building frame near tower crane during daytime',
+      },
+    ]}
+  />
+
+  <TestimonialsSection
+    title="Fast-Track Your Projects"
+    subTitle="At ScrewFast, we ensure a swift start with instant account setup. Experience the speed of construction redefined."
+    ;
+    testimonials={[
+      {
+        content:
+          'ScrewFast dramatically boosted our project efficiency. Setup was instant, and their rapid response times are phenomenal. Truly a game-changer in hardware and construction support!',
+        author: 'Samantha Ruiz',
+        role: 'Chief Operating Officer | ConstructIt Inc.',
+        avatarSrc:
+          'https://images.unsplash.com/photo-1593104547489-5cfb3839a3b5?q=80&w=1453&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80',
+      },
+    ]}
+    statistics={[
+      {
+        count: '70k+',
+        description:
+          'customers equipped — from DIY to major construction firms',
+      },
+      {
+        count: '35%',
+        description:
+          'uptick in project efficiency with ScrewFast tools and services',
+      },
+      {
+        count: '15.3%',
+        description:
+          'reduction in maintenance costs reported by long-term clients',
+      },
+      {
+        count: '2x',
+        description: 'quicker assembly using innovative fastening solutions',
+      },
+    ]}
+  />
+
+  <PricingSection pricing={pricing} />
+
+  <FAQ title="Frequently<br />asked questions" faqs={faqs} />
+
+  <HeroSectionAlt
+    title="Let's Build Together"
+    subTitle="ScrewFast is an open-source template, meticulously crafted with Astro, Tailwind CSS, and Preline UI frameworks."
+    url="https://github.com/mearashadowfax/ScrewFast"
+  />
+</MainLayout>
+
+
