@@ -5,7 +5,6 @@ import NavLink from '@components/ui/links/NavLink.astro';
 import Authentication from '../misc/Authentication.astro';
 import enStrings from '@utils/navigation.ts';
 import frStrings from '@utils/fr/navigation.ts';
-import BrandLogo from '@components/BrandLogo.astro';
 import LanguagePicker from '@components/ui/LanguagePicker.astro';
 
 // Select the correct translation based on the page's lang prop:
@@ -29,7 +28,7 @@ const homeUrl = Astro.currentLocale === 'fr' ? '/fr' : '/';
         href={homeUrl}
         aria-label="Brand"
       >
-        <BrandLogo class="h-auto w-24" />
+        <span class="text-[1.05rem] font-bold tracking-[-0.04em] text-neutral-800">PARK&apos;ES <strong class="font-normal text-[#c36745]">YAPI</strong></span>
       </a>
       {/* Collapse toggle for smaller screens */}
       <div class="mr-5 ml-auto md:hidden">
